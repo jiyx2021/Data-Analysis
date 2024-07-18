@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="user-list" style="height: 380px;overflow-y: hidden;">
+            <h2>Users</h2>
+            <ul id="userList" style="height: 300px;overflow-y: auto;"></ul>
+        </div>
+        <div class="chart-container" style="height: 380px;overflow-y: auto;">
+            <h2 id="userName"></h2>
+            <div>
+                <canvas id="likesOverTimeChart"></canvas>
+            </div>
+            <div>
+                <canvas id="ratiosChart"></canvas>
+            </div>
+            <div class="tags-list" id="tagsList">
+                <ul id="topTags"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/test.js"></script>
+</html>

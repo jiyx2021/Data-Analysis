@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Data Analysis Dashboard, work in progress!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Style related imports -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Function related imports -->
+<!-- Importing D3.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
+<!-- Include ECharts library -->
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+<!-- Importing D3 cloud layout library -->
+<script src="/build/d3.layout.cloud.js"></script>
+<!-- NoUiSlider module import for the time bar -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"></script>
+<!-- Additional font specifications -->
+<style>
+  html, body, h1, h2, h3, h4, h5 {
+    font-family: "Raleway", sans-serif;
+  }
+
+  #wordcloud_container {
+    height: 100%;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 30px;
+  }
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Top container, top menu bar -->
+<div class="w3-bar w3-top w3-indigo w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> Menu</button>
+  <span class="w3-bar-item w3-right" style="font-size: large ;">2024 夏 课程设计</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left w3-card" style="z-index:3;width:200px;" id="mySidebar"><br>
+  <div class="w3-container w3-padding-16">
+    <h3>Data Analysis Dashboard</h3>
+  </div>
+  <div class="w3-bar-block">
+    <!-- Navigation bar paths. Transitions to separate parts of the page -->
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i> Close Menu</a>
+    <a href="javascript:void(0)" id="nav-overview" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Overview</a>
+    <a href="javascript:void(0)" id="nav-wordcloud" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment fa-fw"></i>Wordcloud</a>
+    <a href="javascript:void(0)" id="nav-lda" class="w3-bar-item w3-button w3-padding"><i class="fa fa-dashboard fa-fw"></i>LDA Analysis</a>
+    <a href="javascript:void(0)" id="nav-heatmap" class="w3-bar-item w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>Heat map</a>
+    <a href="javascript:void(0)" id="nav-user-data" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i>User Data Analysis</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-arrow-right fa-fw"></i>Return</a>
+  </div>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px;margin-top: 43px;margin-right: 43px;">
+  <!-- Spacer empty div -->
+   <hr><hr>
+  <!-- Basic statistics with Overview Module -->
+  <div class="w3-container w3-row-padding w3-margin-bottom w3-padding-32 w3-white w3-round-large w3-card">
+    <!-- Overview text -->
+    <h1 class="w3-bottombar w3-border-indigo w3-margin-left w3-margin-bottom">Overview</h1>
+    <!-- Box of 4 statistics -->
+     <div class="w3-container w3-third w3-row-padding">
+      <!-- Top row -->
+      <div class="w3-row-padding w3-margin-bottom">
+        <!-- Messages stat box -->
+        <div class="w3-half">
+          <div class="w3-container w3-red w3-padding-16 w3-round-large">
+            <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+            <div class="w3-right">
+              <h3>52</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Posts</h4>
+          </div>
+        </div>
+        <!-- Views stat box -->
+        <div class="w3-half">
+          <div class="w3-container w3-blue w3-padding-16 w3-round-large">
+            <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+            <div class="w3-right">
+              <h3>99</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Gifs</h4>
+          </div>
+        </div>
+      </div>
+    <!-- Second row -->
+    <div class="w3-row-padding w3-margin-bottom">
+    <!-- Shares stat box -->
+      <div class="w3-half">
+        <div class="w3-container w3-teal w3-padding-16 w3-round-large">
+          <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+          <div class="w3-right">
+            <h3>23</h3>
+          </div>
+          <div class="w3-clear"></div>
+          <h4>Users</h4>
+        </div>
+      </div>
+      <!-- Users stat box -->
+      <div class="w3-half">
+        <div class="w3-container w3-orange w3-text-white w3-padding-16 w3-round-large">
+          <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+          <div class="w3-right">
+            <h3>156</h3>
+          </div>
+          <div class="w3-clear"></div>
+          <h4>Likes</h4>
+        </div>
+      </div>
+    </div>
+    <!-- Third row -->
+    <div class="w3-row-padding w3-margin-bottom">
+      <!-- Shares stat box -->
+        <div class="w3-half">
+          <div class="w3-container w3-purple w3-padding-16 w3-round-large">
+            <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+            <div class="w3-right">
+              <h3>80</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Comments</h4>
+          </div>
+        </div>
+        <!-- Users stat box -->
+        <div class="w3-half">
+          <div class="w3-container w3-green w3-text-white w3-padding-16 w3-round-large">
+            <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+            <div class="w3-right">
+              <h3>50</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Saves</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Space for some chart I guess? -->
+     <div class="w3-container w3-twothird style="height: 400px">
+      <div class="w3-center" id="polar-chart" style="height:400px">
+              <!-- Polar chart will generate here -->
+      </div>
+     </div>
+  </div>
+
+  <!-- Wordcloud module -->
+  <div id="wordcloud" class="w3-container w3-padding-32 w3-white w3-round-large w3-card">
+    <h1 class="w3-bottombar w3-border-indigo w3-margin-left">Wordcloud!!!</h1>
+    <!-- Div for storing the wordcloud, with id wordcloud_container. -->
+    <!-- The JS function is responsible for generating within these confines -->
+    <div class="w3-container" id="wordcloud_container" style="height: 500px"></div>
+
+    <!-- Input elements and update button -->
+    <div class="w3-row " id="dateSlider" style="margin-left: 50px; margin-right: 50px;">
+      <!-- Dateslider is generated by javascript within this div -->
+    </div>
+    <div class="w3-center w3-row" id="wordcloud_bar">
+      <input type="text" id="fileInput" placeholder="json/wordcloud1.json">
+      <button class = "w3-button" id="updateButton">Update Word Cloud</button>
+    </div>
+  </div>
+  <hr>
+  
+
+  <!-- Div to split LDA drilldown and sentiment analysis into two halves -->
+  <div>
+    <div class="w3-container w3-half w3-white w3-padding-32 w3-round-large w3-card" style="width: 49%;">
+      <h1 class="w3-bottombar w3-border-indigo w3-margin-left">LDA Analysis</h1>
+      <div id="charts" class="w3-container">
+        <iframe src="./LDA.html" height="400" width="100%"></iframe>
+      </div>
+    </div>
+    <div class="w3-container w3-half w3-white w3-padding-32 w3-round-large w3-card w3-right" style="width: 49%;">
+      <h1 class="w3-bottombar w3-border-indigo w3-margin-left">Sentiment Analysis</h1>
+      <div id="sentiment" class="w3-container">
+        <h3>Place graph here!</h3>
+      </div>
+    </div>
+  </div>
+  <div class="w3-container w3-margin-bottom"></div>
+  <hr>
+
+  <!-- Individual user statistics module -->
+  <div id="user-data" class="w3-container w3-row-padding w3-margin-bottom w3-padding-32 w3-round-large w3-card w3-white" >
+    <h1 class="w3-bottombar w3-border-indigo w3-margin-left">Individual User Data Analysis (placeholder)</h1>
+    <div class="w3-container" style="height: 400px">
+      <iframe src="./data_analysis.html" height="400px" width="100%"></iframe>
+    </div>
+  </div>
+  <!-- Add a blank space before the next div -->
+  <div id="container"></div>
+  <hr>
+
+  <!-- Global heatmap module -->
+  <div id="heatmap" class="w3-container w3-row-padding w3-margin-bottom w3-padding-32 w3-round-large w3-card w3-white">
+    <h1 class="w3-bottombar w3-border-indigo w3-margin-left">Global heatmap module</h1>
+    <div class="w3-twothird" style="height: 500px;">
+        <iframe src="./heatmap.html" height="500px" width="100%"></iframe>
+    </div>
+    <div class="w3-third" style="height: 500px;">
+        <h3>Some information such as the most popular locations and countries should go here, as a bar graph</h3>
+    </div>
+  </div>
+  <!-- End of main content -->
+
+  
+</div>
+
+<!-- Original script, move to separate file in final production -->
+<script>
+  // Get the Sidebar
+  var mySidebar = document.getElementById("mySidebar");
+
+  // Get the DIV with overlay effect
+  var overlayBg = document.getElementById("myOverlay");
+
+  // Toggle between showing and hiding the sidebar, and add overlay effect
+  function w3_open() {
+  console.log('a');
+    if (mySidebar.style.display === 'block') {
+      mySidebar.style.display = 'none';
+      overlayBg.style.display = "none";
+    } else {
+      mySidebar.style.display = 'block';
+      overlayBg.style.display = "block";
+    }
+  }
+
+  // Close the sidebar with the close button
+  function w3_close() {
+  console.log('a');
+
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+  }
+</script>
+
+<!-- Wordcloud script import -->
+<script src="js/wordcloud_script.js"></script>
+<script type="module" src="js/polarchart.js"></script>
+
+</body>
+</html>

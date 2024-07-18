@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- Index for wordcloud -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Cloud</title>
+    <!-- Importing D3.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
+    <!-- Importing D3 cloud layout library -->
+    <script src="/build/d3.layout.cloud.js"></script>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h2>Dynamic wordcloud based on JSON input:</h2>
+    <!-- Input start date and end date -->
+    <input type="text" id="fileInput" placeholder="Enter filename or URL"><br>
+    <input type="date" id="startDate" placeholder="Start Date">
+    <input type="date" id="endDate" placeholder="End Date">
+    <button id="updateButton">Update Word Cloud</button>
+      
+    <!-- Wordcloud content and scripts -->
+    <script src="js/wordcloud_script.js"></script>
+</body>
+</html>

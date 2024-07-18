@@ -1,0 +1,4 @@
+/* Add thin borders around tagged element for debugging and better visualization */
+* {
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Light gray border */
+}

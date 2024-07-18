@@ -1,0 +1,36 @@
+/* Add thin borders around every element for debugging */
+* {
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Light gray border */
+}
+
+
+/* Center svg element within the body element, port to CSS file in final build */
+svg {
+    display: block; /* Changed from flex to block to avoid interference with body styling */
+    margin: auto;   /* Centers the SVG element horizontally */
+    height: 100vh;
+}
+
+/* Index.html */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Stacks child elements vertically */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+button {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin: 20px auto;
+    font-size: 16px;
+    cursor: pointer;
+}
