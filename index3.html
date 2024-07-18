@@ -32,10 +32,12 @@
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 30px;
+    scroll-padding-top: 50px;
   }
 </style>
 </head>
+
+<!-- Body -->
 <body class="w3-light-grey">
 
 <!-- Top container, top menu bar -->
@@ -52,11 +54,13 @@
   <div class="w3-bar-block">
     <!-- Navigation bar paths. Transitions to separate parts of the page -->
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i> Close Menu</a>
-    <a href="javascript:void(0)" id="nav-overview" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Overview</a>
-    <a href="javascript:void(0)" id="nav-wordcloud" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment fa-fw"></i>Wordcloud</a>
-    <a href="javascript:void(0)" id="nav-lda" class="w3-bar-item w3-button w3-padding"><i class="fa fa-dashboard fa-fw"></i>LDA Analysis</a>
-    <a href="javascript:void(0)" id="nav-heatmap" class="w3-bar-item w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>Heat map</a>
-    <a href="javascript:void(0)" id="nav-user-data" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i>User Data Analysis</a>
+    <a href=#overview-nav class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Overview</a>
+    <a href=#wordcloud-nav class="w3-bar-item w3-button w3-padding"><i class="fa fa-cloud fa-fw"></i>Wordcloud</a>
+    <a href=#lda-nav class="w3-bar-item w3-button w3-padding"><i class="fa fa-dashboard fa-fw"></i>LDA Analysis</a>
+    <a href=#lda-nav class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment fa-fw"></i>Sentiment Analysis</a>
+    <a href=#clustering-nav class="w3-bar-item w3-button w3-padding"><i class="fa fa-bars fa-fw"></i>Clustering</a>
+    <a href=#userdata-nav class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i>User Data Analysis</a>
+    <a href=#heatmap-nav class="w3-bar-item w3-button w3-padding"><i class="fa fa-globe fa-fw"></i>Heat map</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-arrow-right fa-fw"></i>Return</a>
   </div>
 </nav>
@@ -69,7 +73,7 @@
   <!-- Spacer empty div -->
    <hr><hr>
   <!-- Basic statistics with Overview Module -->
-  <div class="w3-container w3-row-padding w3-margin-bottom w3-padding-32 w3-white w3-round-large w3-card">
+  <div id="overview-nav" class="w3-container w3-row-padding w3-margin-bottom w3-padding-32 w3-white w3-round-large w3-card">
     <!-- Overview text -->
     <h1 class="w3-bottombar w3-border-indigo w3-margin-left w3-margin-bottom">Overview</h1>
     <!-- Box of 4 statistics -->
@@ -159,11 +163,12 @@
   </div>
 
   <!-- Wordcloud module -->
-  <div id="wordcloud" class="w3-container w3-padding-32 w3-white w3-round-large w3-card">
+  <div id="wordcloud-nav" class="w3-container w3-padding-32 w3-white w3-round-large w3-card">
     <h1 class="w3-bottombar w3-border-indigo w3-margin-left">Wordcloud!!!</h1>
     <!-- Div for storing the wordcloud, with id wordcloud_container. -->
-    <!-- The JS function is responsible for generating within these confines -->
-    <div class="w3-container" id="wordcloud_container" style="height: 500px"></div>
+    <div class="w3-container" id="wordcloud_container" style="height: 500px">
+      <!-- The JS function is responsible for generating within these confines -->
+    </div>
 
     <!-- Input elements and update button -->
     <div class="w3-row " id="dateSlider" style="margin-left: 50px; margin-right: 50px;">
@@ -176,18 +181,18 @@
   </div>
   <hr>
   
-
   <!-- Div to split LDA drilldown and sentiment analysis into two halves -->
-  <div>
+  
+  <div id="lda-nav">
     <div class="w3-container w3-half w3-white w3-padding-32 w3-round-large w3-card" style="width: 49%;">
       <h1 class="w3-bottombar w3-border-indigo w3-margin-left">LDA Analysis</h1>
-      <div id="charts" class="w3-container">
+      <div id="charts" class="w3-container" style="height: 400px;">
         <iframe src="./LDA.html" height="400" width="100%"></iframe>
       </div>
     </div>
     <div class="w3-container w3-half w3-white w3-padding-32 w3-round-large w3-card w3-right" style="width: 49%;">
       <h1 class="w3-bottombar w3-border-indigo w3-margin-left">Sentiment Analysis</h1>
-      <div id="sentiment" class="w3-container">
+      <div id="donutchart-container" class="w3-container" style="height: 400px;">
         <h3>Place graph here!</h3>
       </div>
     </div>
@@ -195,32 +200,45 @@
   <div class="w3-container w3-margin-bottom"></div>
   <hr>
 
+  <!-- User clustering module -->
+  <div id="clustering-nav" class="w3-container w3-margin-bottom w3-padding-32 w3-white w3-round-large w3-card"">
+    <h1 class="w3-bottombar w3-border-indigo w3-margin-left">User clustering</h1>
+    <div id = "user-cluster" class="w3-container"  style="height: 400px;">
+      <h1>Place user clustering here!!!</h1>
+      <!-- User clustering data will be generated in this div -->
+    </div>
+  </div>
+
   <!-- Individual user statistics module -->
-  <div id="user-data" class="w3-container w3-row-padding w3-margin-bottom w3-padding-32 w3-round-large w3-card w3-white" >
+  <div id="userdata-nav" class="w3-container w3-margin-bottom w3-padding-32 w3-round-large w3-card w3-white" >
     <h1 class="w3-bottombar w3-border-indigo w3-margin-left">Individual User Data Analysis (placeholder)</h1>
     <div class="w3-container" style="height: 400px">
       <iframe src="./data_analysis.html" height="400px" width="100%"></iframe>
     </div>
   </div>
-  <!-- Add a blank space before the next div -->
-  <div id="container"></div>
-  <hr>
 
   <!-- Global heatmap module -->
-  <div id="heatmap" class="w3-container w3-row-padding w3-margin-bottom w3-padding-32 w3-round-large w3-card w3-white">
+  <div id="heatmap-nav" class="w3-container w3-row-padding w3-margin-bottom w3-padding-32 w3-round-large w3-card w3-white">
     <h1 class="w3-bottombar w3-border-indigo w3-margin-left">Global heatmap module</h1>
     <div class="w3-twothird" style="height: 500px;">
         <iframe src="./heatmap.html" height="500px" width="100%"></iframe>
     </div>
     <div class="w3-third" style="height: 500px;">
-        <h3>Some information such as the most popular locations and countries should go here, as a bar graph</h3>
+      <h5>Placeholder graph</h5>
+        <div id="barchart-container" class="w3-container" style="height:400px">
+          <!-- Generate a barchart here -->
+        </div>
     </div>
   </div>
   <!-- End of main content -->
-
-  
 </div>
 
+<!-- Footer exists outside main content to not inherit border margins -->
+<footer class="w3-footer w3-bar w3-indigo" style="height: 50px;">
+  <span class="w3-bar-item w3-right" style="font-size: large ;">2024 夏 课程设计</span>
+</footer>
+
+<!-- Script related codes -->
 <!-- Original script, move to separate file in final production -->
 <script>
   // Get the Sidebar
@@ -250,9 +268,11 @@
   }
 </script>
 
-<!-- Wordcloud script import -->
+<!-- Graph script imports -->
 <script src="js/wordcloud_script.js"></script>
 <script type="module" src="js/polarchart.js"></script>
+<script type="module" src="js/barchart.js"></script>
+<script type="module" src="js/donutchart.js"></script>
 
 </body>
 </html>
