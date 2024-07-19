@@ -1,19 +1,11 @@
-07.15
+记住！
 
-把大家的东西都放到了不同的文件夹里，希望能简洁一点！并且把我的wordcloud页面重命名为wordcloud.html，原来的menu改成了index。
-我尽量把我所有看到的文件路径都改了过来，但是我这边安装sklearn有点问题所以个别文件跑不了。
-你们拿到了之后麻烦再测试一下看看，有没有哪个路径我忘记改了？
+vs code 里面登录你的 GitHub 账号之后 （左下角），先把这个 repository 给 clone 一个到自己本地电脑里面
+然后对其进行修改
+修改完了之后，把那些修改都 commit 到网上的这个主版本内
+再点击 sync changes 同步本地的那些更改
 
-接下来：
-- 把所有html页面中的JavaScript部分搬到分开的文件中，存入js文件夹里面
-- 确保所有页面导入的数据是以json格式！
-- 之后，把所有的数据分析展示页面放到一个页面中（所以JavaScript的compartmentalization很重要！）
-- 做美化！最后，希望能够应用同一份css文件，以保持页面之间外观的一致性。
+之后再要做编辑的话，不用 clone，直接拿原来的然后选择 pull 就行了
+这样会把你本地的文件夹更新到最新版本
 
-对于wordcloud，后端和前端的api和json文件的请求，生成，和上传逻辑写了一点，但是目前还没有能够测试。
-- 网页JavaScript 会 fetch 一个 url
-- 这个 url 被 django 中的 urls.py 解析，并调用 wordcloud_data 函数（在views里面）
-- 调用 views 里的 wordcloud 函数中，会基于网页提供的时间信息调用我们的 backend_wordcloud_json 函数并返回一个 JsonResponse
-- 传回去后，网页就会变化！
-
-TEST UPDATE
+加油！
