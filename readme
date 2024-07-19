@@ -14,3 +14,7 @@ Test change 2
 test change 3
 test change 4
 marco was here
+
+07.19 晚更改：
+- 个别模块变大
+- 情感分析模块删除，已经融入到了个人分析
